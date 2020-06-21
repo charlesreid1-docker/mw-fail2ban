@@ -14,14 +14,12 @@ $wgExtensionCredits['other'][] = array(
 $wgHooks['AuthManagerLoginAuthenticateAudit'][] = 'logBadLogin';
  
 function logBadLogin($response, $user, $username) {
-global $wgfail2banfile;
-global $wgfail2banid;
         if ( $response->status == "PASS" ) return true; // Do not log success or password send request, continue to next hook
         $time = date ("Y-m-d H:i:s T");
         $ip = $_SERVER['REMOTE_ADDR']; // wfGetIP() may yield different results for proxies
 
         // append a line to the log
-        error_log("$time Authentication error from $ip on $wgfail2banid\n",3,$wgfail2banfile);
+        error_log("$time Authentication error from $ip on $wgfail2banid\n",0);
         return true; // continue to next hook
 }
 ?>
