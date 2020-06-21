@@ -19,7 +19,7 @@ function logBadLogin($response, $user, $username) {
         $ip = $_SERVER['REMOTE_ADDR']; // wfGetIP() may yield different results for proxies
 
         // append a line to the log
-        error_log("$time Authentication error from $ip on $wgfail2banid\n",0);
+        error_log("$time MediaWiki authentication error from $ip\n",0);
         return true; // continue to next hook
 }
 ?>
