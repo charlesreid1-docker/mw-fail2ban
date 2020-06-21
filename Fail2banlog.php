@@ -6,7 +6,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 
 $wgExtensionCredits['other'][] = array(
        'name' => 'fail2banlog',
-       'author' => array ( 'Laurent Chouraki', 'Andrey N. Petrov' );
+       'author' => array ( 'Laurent Chouraki', 'Andrey N. Petrov' ),
        'url' => 'https://www.mediawiki.org/wiki/Extension:Fail2banlog',
        'description' => 'Writes a text file with IP of failed login as an input for the fail2ban software'
        );
