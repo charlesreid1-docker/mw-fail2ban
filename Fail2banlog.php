@@ -14,12 +14,16 @@ $wgExtensionCredits['other'][] = array(
 $wgHooks['AuthManagerLoginAuthenticateAudit'][] = 'logBadLogin';
  
 function logBadLogin($response, $user, $username) {
-        if ( $response->status == "PASS" ) return true; // Do not log success or password send request, continue to next hook
-        $time = date ("Y-m-d H:i:s T");
-        $ip = $_SERVER['REMOTE_ADDR']; // wfGetIP() may yield different results for proxies
+    global $wgRequest;
 
-        // append a line to the log
-        error_log("$time MediaWiki authentication error from $ip\n",0);
-        return true; // continue to next hook
+    if ( $response->status == "PASS" ) return true; // Do not log success or password send request, continue to next hook
+    $time = date ("Y-m-d H:i:s T");
+    $remote_addr_ip = $_SERVER['REMOTE_ADDR'];
+    $get_ip = $wgRequest->getIP();
+    // wfGetIP() may yield different results for proxies
+
+    // append a line to the log
+    error_log("$time MediaWiki authentication error from $remote_addr_ip (remote addr) or $get_ip (wgRequest->getIP())\n",0);
+    return true; // continue to next hook
 }
 ?>
