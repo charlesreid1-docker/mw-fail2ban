@@ -20,10 +20,11 @@ function logBadLogin($response, $user, $username) {
     $time = date ("Y-m-d H:i:s T");
     $remote_addr_ip = $_SERVER['REMOTE_ADDR'];
     $get_ip = $wgRequest->getIP();
+    $xff = $wgRequest->getHeader( 'X-Forwarded-For' );
     // wfGetIP() may yield different results for proxies
 
     // append a line to the log
-    error_log("$time MediaWiki authentication error from $remote_addr_ip (remote addr) or $get_ip (wgRequest->getIP())\n",0);
+    error_log("$time MediaWiki authentication error from $remote_addr_ip (remote addr) or $get_ip (wgRequest->getIP()) or $xff (xff header)\n",0);
     return true; // continue to next hook
 }
 ?>
